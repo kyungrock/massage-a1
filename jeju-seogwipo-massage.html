@@ -4,21 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="./" />
-    <title>제주시마사지 추천 - 제주 제주시 마사지 업체 모음 | 마사지가가</title>
+    <title>
+      제주 서귀포마사지 추천 - 제주 서귀포시 마사지 업체 모음 | 마사지가가
+    </title>
 
     <meta
       name="description"
-      content="제주시마사지 추천 업체 정보. 제주 제주시 마사지샵 가격, 위치, 리뷰 정보. 제주시 최고의 마사지를 마사지가가에서 찾아보세요."
+      content="제주 서귀포마사지 추천 업체 정보. 제주 서귀포시 마사지샵 가격, 위치, 리뷰 정보. 서귀포시 최고의 마사지를 마사지가가에서 찾아보세요."
     />
     <meta
       name="keywords"
-      content="제주시마사지, 제주시건마, 제주시스웨디시, 제주시1인샵, 제주마사지, 마사지가가"
+      content="제주서귀포마사지, 서귀포마사지, 서귀포건마, 서귀포스웨디시, 서귀포1인샵, 제주마사지, 마사지가가"
     />
     <meta
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
-    <link rel="canonical" href="https://massagegaga.com/jeju-si-massage.html" />
+    <link
+      rel="canonical"
+      href="https://massagegaga.com/jeju-seogwipo-massage.html"
+    />
 
     <link rel="stylesheet" href="style.css" />
     <link
@@ -272,7 +277,7 @@
     <!-- 업체 목록 -->
     <main class="main-content">
       <div class="results-header">
-        <h2 id="resultsTitle">제주시마사지 전체 업체</h2>
+        <h2 id="resultsTitle">제주 서귀포마사지 전체 업체</h2>
         <span id="resultsCount" class="results-count">총 0개</span>
       </div>
 
@@ -359,7 +364,7 @@
 
     <script src="script.js"></script>
     <script>
-      // 페이지 로드 시 제주시 지역 자동 선택
+      // 페이지 로드 시 서귀포시 지역 자동 선택
       document.addEventListener('DOMContentLoaded', function () {
         const regionSelect = document.getElementById('regionSelect');
         const districtSelect = document.getElementById('districtSelect');
@@ -378,9 +383,9 @@
 
         setTimeout(function () {
           if (districtSelect) {
-            districtSelect.value = '제주시';
+            districtSelect.value = '서귀포시';
             if (typeof currentDistrict !== 'undefined') {
-              currentDistrict = '제주시';
+              currentDistrict = '서귀포시';
             }
           }
 
@@ -388,10 +393,10 @@
             displayFilteredResults();
           } else {
             const shops = massageShops.filter(
-              (shop) => shop.region === '제주' && shop.district === '제주시'
+              (shop) => shop.region === '제주' && shop.district === '서귀포시'
             );
             displayMassageShops(shops);
-            updateResultsHeader('제주시마사지 전체 업체', shops.length);
+            updateResultsHeader('제주 서귀포마사지 전체 업체', shops.length);
           }
         }, 100);
       });
