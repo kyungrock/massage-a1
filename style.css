@@ -1839,7 +1839,7 @@ body {
 /* 예약 섹션 */
 .booking-section {
   background: white;
-  padding: 10px 20px;
+  padding: 6px 20px;
   position: sticky;
   bottom: 0;
   z-index: 10;
@@ -1847,7 +1847,7 @@ body {
 }
 
 .booking-container {
-  max-width: 480px;
+  max-width: 360px;
   margin: 0 auto;
 }
 
@@ -1855,7 +1855,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .price-info {
@@ -1877,21 +1877,27 @@ body {
 
 .booking-actions {
   display: flex;
-  gap: 10px;
+  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .call-btn,
 .map-btn {
-  padding: 8px 16px;
+  padding: 8px 12px;
   border: none;
-  border-radius: 20px;
-  font-size: 0.85rem;
+  border-radius: 18px;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 4px;
   transition: all 0.3s;
+  flex: 1;
+  min-width: 0;
 }
 
 .call-btn {
@@ -1929,7 +1935,7 @@ body {
   .services-section,
   .reviews-section,
   .booking-section {
-    padding: 10px 15px;
+    padding: 4px 15px;
   }
 
   .shop-flag .flag-image {
@@ -1953,9 +1959,9 @@ body {
 
   .call-btn,
   .map-btn {
-    padding: 6px 2px;
-    font-size: 0.8rem;
-    gap: 4px;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    gap: 3px;
   }
 
   .staff-intro {
@@ -2022,7 +2028,7 @@ body {
   .booking-info {
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
   }
 
   .booking-actions {
@@ -2186,25 +2192,26 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 8px 12px;
-  border-radius: 20px;
+  border-radius: 18px;
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
   border: 1px solid #dee2e6;
-  min-width: 80px;
+  flex: 1;
+  min-width: 0;
   text-align: center;
 }
 
 .booking-info .nearby-title-line1 {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .booking-info .nearby-title-line2 {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 0.8rem;
+  gap: 3px;
+  font-size: 0.65rem;
   font-weight: 500;
   color: #666;
 }
