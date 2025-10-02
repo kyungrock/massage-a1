@@ -568,9 +568,9 @@ body {
 .card-image .shop-type {
   background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
   color: white;
-  padding: 4px 8px;
+  padding: 6px 12px;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
@@ -579,6 +579,11 @@ body {
   animation: pulse 2s infinite;
   white-space: nowrap;
   min-width: fit-content;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
 
 @keyframes pulse {
@@ -744,6 +749,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
   gap: 10px;
   flex-wrap: nowrap;
 }
@@ -1087,8 +1093,8 @@ body {
   }
 
   .card-image .shop-type {
-    font-size: 0.6rem;
-    padding: 3px 6px;
+    font-size: 0.75rem;
+    padding: 4px 8px;
     border-radius: 10px;
   }
 
@@ -1354,6 +1360,20 @@ body {
   padding: 4px 8px;
   border-radius: 12px;
   font-weight: 500;
+}
+
+.location-flag {
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+}
+
+.location-flag .flag-image {
+  width: 18px;
+  height: 14px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .shop-flag {
@@ -1862,15 +1882,15 @@ body {
 
 .call-btn,
 .map-btn {
-  padding: 12px 20px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 25px;
-  font-size: 0.9rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.3s;
 }
 
@@ -1929,6 +1949,13 @@ body {
   .staff-info p {
     font-size: 0.9rem;
     line-height: 1.5;
+  }
+
+  .call-btn,
+  .map-btn {
+    padding: 6px 2px;
+    font-size: 0.8rem;
+    gap: 4px;
   }
 
   .staff-intro {
@@ -2159,7 +2186,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 20px;
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
   border: 1px solid #dee2e6;
   min-width: 80px;

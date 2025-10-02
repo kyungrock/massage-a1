@@ -1265,12 +1265,6 @@ function createShopCard(shop) {
                 <div class="image-overlay">
                     <div class="shop-type">${getTypeName(shop.type)}</div>
                 </div>
-                <div class="card-flag">
-                    <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" 
-                         alt="한국 국기" 
-                         class="flag-image"
-                         onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='20px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='4px';">
-                </div>
             </div>
             
             <div class="card-content">
@@ -1280,6 +1274,12 @@ function createShopCard(shop) {
                         <div class="shop-location-info">
                             <span class="shop-district">${locationInfo}</span>
                             <span class="shop-distance">${distance}km</span>
+                            <div class="location-flag">
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" 
+                                     alt="한국 국기" 
+                                     class="flag-image"
+                                     onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                            </div>
                         </div>
                     </div>
                 </div>
