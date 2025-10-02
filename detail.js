@@ -72,16 +72,12 @@ function displayShopInfo(shop) {
     totalReviews: document.getElementById('totalReviews'),
     shopCountryFlags: document.getElementById('shopCountryFlags'),
     shopDistrict: document.getElementById('shopDistrict'),
-    shopDistance: document.getElementById('shopDistance'),
   };
 
   // 모든 정보를 즉시 표시 (성능 최적화)
 
-  // shop name 앞에 동 추가
-  const dongName = extractDongFromAddress(shop.address);
-  elements.shopName.textContent = dongName
-    ? `${dongName} ${shop.name}`
-    : shop.name;
+  // shop name 표시 (이미 동이 포함된 경우 중복 추가 방지)
+  elements.shopName.textContent = shop.name;
 
   elements.shopPrice.textContent = shop.price;
 
@@ -89,12 +85,6 @@ function displayShopInfo(shop) {
   const locationInfo = extractLocationInfo(shop.address);
   if (elements.shopDistrict) {
     elements.shopDistrict.textContent = locationInfo;
-  }
-
-  // 거리 정보 표시 (랜덤 키로수)
-  if (elements.shopDistance) {
-    const distance = generateRandomDistance();
-    elements.shopDistance.textContent = `${distance}km`;
   }
 
   // 나머지 정보 표시
@@ -194,14 +184,6 @@ function extractLocationInfo(address) {
   }
 
   return location;
-}
-
-// 랜덤 거리 생성 (0.5km ~ 15km)
-function generateRandomDistance() {
-  const min = 0.5;
-  const max = 15;
-  const distance = Math.random() * (max - min) + min;
-  return Math.round(distance * 10) / 10; // 소수점 첫째자리까지
 }
 
 // 지도보기 함수 (최적화된 버전)
@@ -384,9 +366,9 @@ function displayShopCourses(shop) {
       html += `<div class="course-item">
                 <div class="course-header">
                     <span class="course-name">${course.name}</span>
+                    <div class="course-duration">${course.duration}</div>
                     <span class="course-price">${course.price}</span>
                 </div>
-                <div class="course-duration">${course.duration}</div>
                 <div class="course-description">${course.description}</div>
             </div>`;
     });
@@ -903,11 +885,6 @@ function extractLocationInfo(address) {
     return `${parts[1]} ${parts[2]}`;
   }
   return address;
-}
-
-// 랜덤 거리 생성 (0.5km ~ 15km)
-function generateRandomDistance() {
-  return (Math.random() * 14.5 + 0.5).toFixed(1);
 }
 
 // 업체명에서 동 추출하여 새로운 이름 생성

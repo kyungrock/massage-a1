@@ -232,8 +232,9 @@ const districtData = {
 const massageShops = [
   {
     id: 1,
-    name: '제주도마사지 프라이빗',
-    type: 'korean',
+    name: '연동 프라이빗',
+    type: '마사지, 왁싱, 스웨디시',
+    country: 'korea, china',
     region: '제주',
     district: '제주시',
     address: '제주특별자치도 제주시 연동 261-18',
@@ -385,8 +386,9 @@ const massageShops = [
   },
   {
     id: 2,
-    name: '제주마사지 MZ',
-    type: 'korean',
+    name: '연동 MZ',
+    type: '마사지, 스웨디시',
+    country: 'korea',
     region: '제주',
     district: '제주시',
     address: '제주특별자치도 제주시 연동10길 16',
@@ -401,7 +403,6 @@ const massageShops = [
       'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=250&fit=crop&crop=center',
     services: [
       '스웨디시',
-      '타이마사지',
       '왁싱',
       '스파',
       '커플마사지',
@@ -498,6 +499,235 @@ const massageShops = [
         rating: 5,
         comment:
           '24시간 운영이라 새벽에 갔는데도 친절하게 맞아주셨어요! 체이님께 받은 스파 서비스가 정말 좋았어요. 제주도 여행 필수 코스입니다.',
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: '제주시 이쁘니출장',
+    type: '출장마사지',
+    country: 'korea, japan',
+    region: '제주',
+    district: '제주시',
+    address: '제주도 전지역',
+    detailAddress: '제주시 30분 이내 신속방문',
+    phone: '0507-1859-6960',
+    rating: 4.8,
+    reviewCount: 16,
+    price: '110,000원~',
+    description:
+      '제주도 전지역 출장마사지 최고의 서비스를 보장하는 이쁘니 출장입니다. 제주도 놀러오신 분들 또는 현지분들께 신속하고 빠른 힐링을 전달해 드립니다. 20대~30대 고퀄리티 관리사가 24시간 서비스합니다.',
+    image:
+      'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&h=250&fit=crop&crop=center',
+    services: [
+      '스웨디시',
+      '아로마마사지',
+      '타이마사지',
+      '로미로미',
+      '슈얼마사지',
+      '출장마사지',
+      '홈타이',
+    ],
+    subway: '제주도 전지역',
+    operatingHours: '24시간 (폰이 꺼진 경우: 마감, 랜덤휴무)',
+    staffInfo: '전원 한국인&일본 여 쌤 (20대 & 힐링샵)',
+    features: [
+      '제주도 전지역 출장 서비스',
+      '20대~30대 고퀄리티 관리사',
+      '제주시 30분 이내 신속방문',
+      '24시간 운영',
+      '천연 수용성 오일 사용',
+      '현금 결제 시 할인 적용',
+    ],
+    keywords:
+      '제주출장마사지, 제주도출장마사지, 제주홈타이, 제주도홈타이, 이쁘니출장, 제주출장, 제주도출장',
+    courses: [
+      {
+        category: '힐링 테라피',
+        items: [
+          {
+            name: 'A코스',
+            duration: '60분',
+            price: '110,000원',
+            description: '힐링 테라피',
+          },
+          {
+            name: 'B코스',
+            duration: '80분',
+            price: '130,000원',
+            description: '힐링 테라피',
+          },
+          {
+            name: 'C코스',
+            duration: '100분',
+            price: '160,000원',
+            description: '힐링 테라피',
+          },
+        ],
+      },
+    ],
+    membershipInfo:
+      '기존가 130,000원 → 회원가 110,000원 (현금 결제 시 적용, 건마시티 회원임을 말씀하셔야 할인가 적용)',
+    reviews: [
+      {
+        name: '김**',
+        date: '2024-09-28',
+        rating: 5,
+        comment:
+          '이쁘니출장에서 받은 출장마사지가 정말 최고예요! 제주시에서 30분 만에 도착해서 놀랐어요. 20대 관리사분께서 정말 부드럽고 실력 좋게 해주셨습니다.',
+      },
+      {
+        name: '박**',
+        date: '2024-09-25',
+        rating: 5,
+        comment:
+          '제주도 여행 중 호텔에서 출장마사지를 받았는데 정말 편했어요! 24시간 운영이라 늦은 시간에도 이용할 수 있었고, 천연 오일 사용해서 피부에도 좋았어요.',
+      },
+      {
+        name: '이**',
+        date: '2024-09-22',
+        rating: 5,
+        comment:
+          '홈타이 서비스가 정말 좋았어요! 제주도 전지역 출장 가능하다고 해서 서귀포시에서도 신청했는데 정말 와주셨어요. 힐링 테라피 C코스 받았는데 100분 동안 정말 힐링되는 시간이었어요.',
+      },
+      {
+        name: '최**',
+        date: '2024-09-20',
+        rating: 5,
+        comment:
+          '일본인 관리사분께서 해주신 타이마사지가 너무 좋았어요! 출장마사지인데도 실내 마사지샵 못지않게 전문적이었어요. 회원가도 적용해주셔서 감사했습니다.',
+      },
+      {
+        name: '정**',
+        date: '2024-09-18',
+        rating: 5,
+        comment:
+          '이쁘니출장은 정말 믿을만해요! 제주도 현지인인데 여러 번 이용했는데 항상 만족스러워요. 20대~30대 관리사분들이라 대화도 잘 통하고 편안했어요.',
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: '연동 A+스웨디시',
+    type: '마사지, 스웨디시',
+    country: 'korea',
+    region: '제주',
+    district: '제주시',
+    address: '제주특별자치도 제주시 연동 293-102',
+    detailAddress: '송월타월 2층',
+    phone: '0507-1859-6407',
+    rating: 4.8,
+    reviewCount: 85581,
+    price: '90,000원~',
+    description:
+      '제주도연동 A+스웨디시 인사 드립니다! 저희 샵은 철저한 관리사 교육으로 실력 및 마인드가 정말 좋습니다. 샵으로 육체적 힐링은 물론 심신의 안정과 내적치유도 도와드리도록 하겠습니다. 감사합니다. ❤',
+    image:
+      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&crop=center',
+    services: ['A+ 스웨디시', '감성 테라피', '스페셜 스웨디시', '림프 관리'],
+    subway: '송월타월 2층',
+    operatingHours: '24시간 (랜덤휴무 or 폰OFF)',
+    staffInfo:
+      '전원 한국인 여성 힐러 | 20대 & 힐링샵 | 모두 상기 종목 코스 수료 | 은채(20대), 소희(20대), 유미(20대), 겨울(20대), 구름(20대)',
+    features: [
+      '24시간 운영',
+      '전원 한국인 여성 관리사',
+      '20대 전문 관리사',
+      '주차 가능',
+      '건마시티 회원 할인',
+      '송월타월 2층 위치',
+    ],
+    keywords:
+      '제주연동마사지, A+스웨디시, 연동마사지, 제주마사지, 24시간마사지, 건마시티, 송월타월',
+    courses: [
+      {
+        category: 'A+ 코스',
+        items: [
+          {
+            name: 'A 주간',
+            duration: '40분',
+            price: '90,000원',
+            description: 'A+ 스웨디시',
+          },
+          {
+            name: 'A 야간',
+            duration: '40분',
+            price: '100,000원',
+            description: 'A+ 스웨디시',
+          },
+        ],
+      },
+      {
+        category: '감성 테라피',
+        items: [
+          {
+            name: 'B 주간',
+            duration: '60분',
+            price: '140,000원',
+            description: '스페셜 스웨디시 + 림프관리 + 감성',
+          },
+          {
+            name: 'B 야간',
+            duration: '60분',
+            price: '150,000원',
+            description: '스페셜 스웨디시 + 림프관리 + 감성',
+          },
+        ],
+      },
+      {
+        category: '프리미엄 코스',
+        items: [
+          {
+            name: 'C 주간',
+            duration: '70분',
+            price: '170,000원',
+            description: '스페셜 스웨디시 + 슈 + 림프관리 + 감성',
+          },
+          {
+            name: 'C 야간',
+            duration: '70분',
+            price: '180,000원',
+            description: '스페셜 스웨디시 + 슈 + 림프관리 + 감성',
+          },
+        ],
+      },
+    ],
+    membershipInfo:
+      '기존가 120,000원 → 회원가 90,000원 (건마시티 회원임을 말씀하셔야 할인가 적용)',
+    reviews: [
+      {
+        name: '건마시티 회원',
+        date: '2024-12-19',
+        rating: 5,
+        comment:
+          '철저한 관리사 교육으로 실력과 마인드가 정말 좋습니다. 24시간 운영이라 언제든 이용 가능해서 편리해요.',
+      },
+      {
+        name: '김**',
+        date: '2024-12-15',
+        rating: 5,
+        comment:
+          'A+ 스웨디시 정말 좋았어요! 20대 관리사분들이 정말 전문적이고 친절하세요. 송월타월 2층 위치도 찾기 쉬웠어요.',
+      },
+      {
+        name: '박**',
+        date: '2024-12-10',
+        rating: 5,
+        comment:
+          '감성 테라피 B코스 받았는데 정말 힐링되는 시간이었어요. 림프관리까지 해주셔서 몸이 정말 가벼워졌어요.',
+      },
+      {
+        name: '이**',
+        date: '2024-12-05',
+        rating: 5,
+        comment:
+          '24시간 운영이라 새벽에 갔는데도 친절하게 맞아주셨어요! 건마시티 회원 할인도 적용해주셔서 감사했습니다.',
+      },
+      {
+        name: '최**',
+        date: '2024-11-28',
+        rating: 5,
+        comment:
+          '프리미엄 코스 C코스 받았는데 정말 최고예요! 스페셜 스웨디시에 슈까지 해주셔서 완전 힐링되었어요.',
       },
     ],
   },
@@ -966,7 +1196,7 @@ function performMainSearch() {
       shop.region.toLowerCase().includes(searchTerm) ||
       shop.district.toLowerCase().includes(searchTerm) ||
       shop.description.toLowerCase().includes(searchTerm) ||
-      getTypeName(shop.type).toLowerCase().includes(searchTerm) ||
+      getTypeName(shop).toLowerCase().includes(searchTerm) ||
       (shop.subway && shop.subway.toLowerCase().includes(searchTerm))
     );
   });
@@ -1068,32 +1298,114 @@ function displayFilteredResults() {
 
   // 타입 필터 적용
   if (currentFilter === 'massage') {
-    // 마사지 타입들 (태국, 한국, 발마사지, 스파)
-    filteredShops = filteredShops.filter((shop) =>
-      ['thai', 'korean', 'foot', 'spa'].includes(shop.type)
-    );
+    // 마사지 타입들 (기존 타입 + 새로운 타입들, 출장마사지 제외)
+    filteredShops = filteredShops.filter((shop) => {
+      // 출장마사지는 제외
+      if (shop.type === '출장마사지') {
+        return false;
+      }
+      // 기존 타입들
+      if (['thai', 'korean', 'foot', 'spa'].includes(shop.type)) {
+        return true;
+      }
+      // 새로운 타입들 (마사지 관련 서비스가 있는 경우)
+      if (shop.type && shop.type.includes('마사지')) {
+        return true;
+      }
+      // services 배열에 마사지 관련 서비스가 있는 경우
+      if (
+        shop.services &&
+        shop.services.some(
+          (service) =>
+            service.includes('마사지') || service.includes('스웨디시')
+        )
+      ) {
+        return true;
+      }
+      return false;
+    });
 
     // 국가별 필터 적용
     if (currentCountry && currentCountry !== 'overall') {
       filteredShops = filteredShops.filter((shop) => {
+        if (shop.country) {
+          return shop.country.includes(currentCountry);
+        }
+        // 기존 로직 유지 (하위 호환성)
         const countryMap = {
-          korea: ['korean', 'foot'],
+          korea: [
+            'korean',
+            'foot',
+            '출장마사지',
+            '마사지, 스웨디시',
+            '마사지, 왁싱, 스웨디시',
+          ],
           thai: ['thai'],
-          china: ['foot'],
+          china: ['foot', '마사지, 왁싱, 스웨디시'],
           russia: ['spa'],
-          japan: ['spa'],
+          japan: ['spa', '출장마사지'],
         };
         return countryMap[currentCountry]?.includes(shop.type) || false;
       });
     }
   } else if (currentFilter === 'outcall') {
     // 출장마사지 타입
-    filteredShops = filteredShops.filter((shop) => shop.type === 'outcall');
+    filteredShops = filteredShops.filter((shop) => shop.type === '출장마사지');
+  } else if (currentFilter === 'waxing') {
+    // 왁싱 타입
+    filteredShops = filteredShops.filter((shop) => {
+      // type에 왁싱이 포함된 경우
+      if (shop.type && shop.type.includes('왁싱')) {
+        return true;
+      }
+      // services에 왁싱이 포함된 경우
+      if (
+        shop.services &&
+        shop.services.some((service) => service.includes('왁싱'))
+      ) {
+        return true;
+      }
+      return false;
+    });
+  } else if (currentFilter === 'swedish') {
+    // 스웨디시 타입
+    filteredShops = filteredShops.filter((shop) => {
+      // type에 스웨디시가 포함된 경우
+      if (shop.type && shop.type.includes('스웨디시')) {
+        return true;
+      }
+      // services에 스웨디시가 포함된 경우
+      if (
+        shop.services &&
+        shop.services.some((service) => service.includes('스웨디시'))
+      ) {
+        return true;
+      }
+      return false;
+    });
 
-    // 국가별 필터 적용 (출장마사지는 모든 국가에서 가능)
+    // 국가별 필터 적용 (출장마사지는 한국, 일본에서 제공)
     if (currentCountry && currentCountry !== 'overall') {
-      // 출장마사지는 국가별 구분 없이 모든 국가에서 제공
-      // 필요시 추가 로직 구현 가능
+      filteredShops = filteredShops.filter((shop) => {
+        if (shop.country) {
+          return shop.country.includes(currentCountry);
+        }
+        // 기존 로직 유지 (하위 호환성)
+        const countryMap = {
+          korea: [
+            'korean',
+            'foot',
+            '출장마사지',
+            '마사지, 스웨디시',
+            '마사지, 왁싱, 스웨디시',
+          ],
+          thai: ['thai'],
+          china: ['foot', '마사지, 왁싱, 스웨디시'],
+          russia: ['spa'],
+          japan: ['spa', '출장마사지'],
+        };
+        return countryMap[currentCountry]?.includes(shop.type) || false;
+      });
     }
   } else if (currentFilter === 'waxing') {
     // 왁싱 타입 - services에 '왁싱' 관련 키워드가 있는 업체들
@@ -1226,8 +1538,9 @@ function generateRandomDistance() {
 
 // 업체명에서 동 추출하여 새로운 이름 생성
 function createShopDisplayName(shop) {
+  // 이미 동이 포함된 이름인지 확인
   const dongName = extractDongFromAddress(shop.address);
-  if (dongName) {
+  if (dongName && !shop.name.includes(dongName)) {
     // 기존 업체명에서 "제주마사지", "제주도마사지" 등을 제거하고 간단하게
     let simpleName = shop.name
       .replace(/제주도?마사지\s*/g, '')
@@ -1263,7 +1576,11 @@ function createShopCard(shop) {
                      onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuaXoOazleWKoOi9vTwvdGV4dD48L3N2Zz4='; this.style.display='block';"
                      loading="lazy">
                 <div class="image-overlay">
-                    <div class="shop-type">${getTypeName(shop.type)}</div>
+                    ${
+                      getTypeName(shop)
+                        ? `<div class="shop-type">${getTypeName(shop)}</div>`
+                        : ''
+                    }
                 </div>
             </div>
             
@@ -1273,12 +1590,21 @@ function createShopCard(shop) {
                         <div class="shop-name">${displayName}</div>
                         <div class="shop-location-info">
                             <span class="shop-district">${locationInfo}</span>
-                            <span class="shop-distance">${distance}km</span>
                             <div class="location-flag">
                                 <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/한국.jpg" 
                                      alt="한국 국기" 
                                      class="flag-image"
                                      onerror="this.onerror=null; this.innerHTML='🇰🇷'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                                ${
+                                  shop.name.includes('이쁘니출장')
+                                    ? `
+                                <img src="https://xn--z69au6wh5golr.com/wp-content/uploads/2025/05/일본.jpg" 
+                                     alt="일본 국기" 
+                                     class="flag-image"
+                                     onerror="this.onerror=null; this.innerHTML='🇯🇵'; this.style.fontSize='16px'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.height='100%'; this.style.background='#f0f0f0'; this.style.borderRadius='3px';">
+                                `
+                                    : ''
+                                }
                             </div>
                         </div>
                     </div>
@@ -1308,8 +1634,12 @@ function createShopCard(shop) {
 }
 
 // 타입 이름 반환
-function getTypeName(type) {
-  // 모든 업체를 "힐링샵"으로 통일
+function getTypeName(shop) {
+  // 프라이빗 업체(id: 1)는 "힐링샵" 표시하지 않음
+  if (shop.id === 1) {
+    return '';
+  }
+  // 나머지 업체는 "힐링샵"으로 표시
   return '힐링샵';
 }
 
@@ -1470,6 +1800,8 @@ function goToDetail(shopId) {
   const urlMap = {
     1: 'jeju-massage-private.html',
     2: 'jeju-massage-mz.html',
+    3: 'jeju-massage-yeppuni.html',
+    4: 'jeju-yeondong-massage.html',
   };
   window.location.href = urlMap[shopId] || `shop-${shopId}.html`;
 }
@@ -1522,8 +1854,8 @@ function displayEmptyState() {
 function sortShops(shops) {
   return shops.sort((a, b) => {
     // 1순위: "힐링샵" 업체를 위로
-    const aIsHealing = getTypeName(a.type) === '힐링샵';
-    const bIsHealing = getTypeName(b.type) === '힐링샵';
+    const aIsHealing = getTypeName(a) === '힐링샵';
+    const bIsHealing = getTypeName(b) === '힐링샵';
 
     if (aIsHealing && !bIsHealing) return -1;
     if (!aIsHealing && bIsHealing) return 1;
