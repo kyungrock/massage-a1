@@ -77,7 +77,7 @@ function displayShopInfo(shop) {
   // 모든 정보를 즉시 표시 (성능 최적화)
 
   // shop name 표시 (이미 동이 포함된 경우 중복 추가 방지)
-  elements.shopName.textContent = shop.name;
+  elements.shopName.textContent = createShopDisplayName(shop);
 
   elements.shopPrice.textContent = shop.price;
 

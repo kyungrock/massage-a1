@@ -810,41 +810,44 @@ function initializeApp() {
     const selectedRegion = this.value;
 
     if (!selectedRegion) {
-      // 지역 선택 해제 시 index.html로
+      // 지역 선택 해제 시 전체로 초기화
+      currentRegion = '';
+      currentDistrict = '';
+      districtSelect.innerHTML = '<option value="">구를 선택하세요</option>';
+      districtSelect.disabled = true;
+      districtSelect.style.opacity = '0.5';
+
+      // 필터링된 결과 표시
+      displayFilteredResults();
       return;
     }
 
-    // 지역별 페이지로 이동
-    const regionUrlMap = {
-      서울: 'seoul-massage.html',
-      부산: 'busan-massage.html',
-      대구: 'daegu-massage.html',
-      인천: 'incheon-massage.html',
-      광주: 'gwangju-massage.html',
-      대전: 'daejeon-massage.html',
-      울산: 'ulsan-massage.html',
-      세종: 'sejong-massage.html',
-      경기: 'gyeonggi-massage.html',
-      강원: 'gangwon-massage.html',
-      충북: 'chungbuk-massage.html',
-      충남: 'chungnam-massage.html',
-      전북: 'jeonbuk-massage.html',
-      전남: 'jeonnam-massage.html',
-      경북: 'gyeongbuk-massage.html',
-      경남: 'gyeongnam-massage.html',
-      제주: 'jeju-massage.html',
-    };
-
-    const targetUrl = regionUrlMap[selectedRegion];
-    if (targetUrl) {
-      window.location.href = targetUrl;
-    } else {
-      // 페이지가 없으면 기존 방식대로 필터링
-      updateDistrictOptions(selectedRegion);
-      currentRegion = selectedRegion;
-      currentDistrict = '';
-      performLocationSearch();
+    // 제주 선택 시 현재 필터에 따라 해당 페이지로 이동
+    if (selectedRegion === '제주') {
+      if (currentFilter === 'massage') {
+        window.location.href = 'jeju-massage.html';
+        return;
+      } else if (currentFilter === 'outcall') {
+        window.location.href = 'jeju-outcall.html';
+        return;
+      } else {
+        window.location.href = 'jeju.html';
+        return;
+      }
     }
+
+    // 현재 지역 설정
+    currentRegion = selectedRegion;
+
+    // 구 선택 옵션 업데이트
+    updateDistrictOptions(selectedRegion);
+
+    // 구 선택 활성화
+    districtSelect.disabled = false;
+    districtSelect.style.opacity = '1';
+
+    // 필터링된 결과 표시
+    displayFilteredResults();
   });
 
   // 구 선택 이벤트 리스너
@@ -854,35 +857,15 @@ function initializeApp() {
     if (!selectedDistrict || !currentRegion) {
       // 구를 선택하지 않으면 지역만으로 필터링
       currentDistrict = '';
-      if (typeof displayFilteredResults === 'function') {
-        displayFilteredResults();
-      } else {
-        performLocationSearch();
-      }
+      displayFilteredResults();
       return;
     }
 
-    // 제주도 구별 페이지로 이동
-    if (currentRegion === '제주') {
-      const districtUrlMap = {
-        제주시: 'jeju-si-massage.html',
-        서귀포시: 'jeju-seogwipo-massage.html',
-      };
-
-      const targetUrl = districtUrlMap[selectedDistrict];
-      if (targetUrl) {
-        window.location.href = targetUrl;
-        return;
-      }
-    }
-
-    // 제주도 외 지역은 페이지 이동 없이 필터링만
+    // 현재 구 설정
     currentDistrict = selectedDistrict;
-    if (typeof displayFilteredResults === 'function') {
-      displayFilteredResults();
-    } else {
-      performLocationSearch();
-    }
+
+    // 필터링된 결과 표시
+    displayFilteredResults();
   });
 
   // 검색 버튼 이벤트 리스너
@@ -927,7 +910,15 @@ function initializeApp() {
       } else if (this.value.length === 0) {
         // 검색어가 없으면 전체 표시
         displayMassageShops(massageShops);
-        updateResultsHeader('전체 마사지 업체', massageShops.length);
+        // 메인 페이지가 아닌 경우 "마사지"로 표시
+        const isMainPage =
+          window.location.pathname.includes('index.html') ||
+          window.location.pathname === '/' ||
+          window.location.pathname === '';
+        const title = isMainPage
+          ? '전체 마사지사이트 업체'
+          : '전체 마사지 업체';
+        updateResultsHeader(title, massageShops.length);
       }
     }, 300);
   });
@@ -943,66 +934,29 @@ function initializeApp() {
       // 현재 필터 업데이트
       currentFilter = this.dataset.filter;
 
-      // 마사지, 출장마사지 클릭 시 국가 필터만 전체로 초기화 (지역은 유지)
-      if (currentFilter === 'massage' || currentFilter === 'outcall') {
-        // 국가 필터만 전체로 초기화
-        currentCountry = 'overall';
-
-        // 국가 박스에서 active 클래스 제거
-        const massageCountryBoxes = document.querySelectorAll(
-          '#massageCountryFilterSection .country-box'
-        );
-        const outcallCountryBoxes = document.querySelectorAll(
-          '#outcallCountryFilterSection .country-box'
-        );
-        massageCountryBoxes.forEach((box) => box.classList.remove('active'));
-        outcallCountryBoxes.forEach((box) => box.classList.remove('active'));
-
-        // 전체 박스에 active 클래스 추가
-        const overallBoxes = document.querySelectorAll(
-          '.country-box[data-country="overall"]'
-        );
-        overallBoxes.forEach((box) => box.classList.add('active'));
-
-        // 국가 필터 섹션 다시 보이기
-        const massageCountryFilterSection = document.getElementById(
-          'massageCountryFilterSection'
-        );
-        const outcallCountryFilterSection = document.getElementById(
-          'outcallCountryFilterSection'
-        );
-        if (massageCountryFilterSection) {
-          massageCountryFilterSection.style.display = '';
+      // 마사지, 출장마사지 클릭 시 해당 HTML 페이지로 이동
+      if (currentFilter === 'massage') {
+        // 제주 지역이 선택된 경우 jeju-massage.html로 이동
+        if (currentRegion === '제주') {
+          window.location.href = 'jeju-massage.html';
+          return;
         }
-        if (outcallCountryFilterSection) {
-          outcallCountryFilterSection.style.display = '';
+        // 다른 지역의 경우 massage.html로 이동
+        window.location.href = 'massage.html';
+        return;
+      } else if (currentFilter === 'outcall') {
+        // 제주 지역이 선택된 경우 jeju-outcall.html로 이동
+        if (currentRegion === '제주') {
+          window.location.href = 'jeju-outcall.html';
+          return;
         }
+        // 다른 지역의 경우 outcall.html로 이동
+        window.location.href = 'outcall.html';
+        return;
       }
 
-      // 필터별 국가 박스 표시/숨김
-      if (currentFilter === 'massage') {
-        document.getElementById('massageCountryFilterSection').style.display =
-          'block';
-        document.getElementById('outcallCountryFilterSection').style.display =
-          'none';
-        document.getElementById('themeFilterSection').style.display = 'none';
-        currentCountry = 'overall'; // 처음에는 전체로 설정
-        // 구 선택 활성화
-        districtSelect.disabled = false;
-        districtSelect.style.opacity = '1';
-      } else if (currentFilter === 'outcall') {
-        document.getElementById('massageCountryFilterSection').style.display =
-          'none';
-        document.getElementById('outcallCountryFilterSection').style.display =
-          'block';
-        document.getElementById('themeFilterSection').style.display = 'none';
-        currentCountry = 'overall'; // 처음에는 전체로 설정
-        // 출장마사지는 구 선택 비활성화
-        districtSelect.disabled = true;
-        districtSelect.style.opacity = '0.5';
-        districtSelect.value = '';
-        currentDistrict = '';
-      } else {
+      // 필터별 국가 박스 표시/숨김 (마사지, 출장마사지는 별도 페이지로 이동하므로 제거)
+      if (currentFilter === 'all') {
         document.getElementById('massageCountryFilterSection').style.display =
           'none';
         document.getElementById('outcallCountryFilterSection').style.display =
@@ -1085,6 +1039,16 @@ function initializeApp() {
 
       // 선택된 테마로 필터링
       const selectedTheme = this.dataset.theme;
+
+      // 제주 지역에서 마사지/출장마사지 테마 클릭 시 해당 페이지로 이동
+      if (selectedTheme === 'massage' && currentRegion === '제주') {
+        window.location.href = 'jeju-massage.html';
+        return;
+      } else if (selectedTheme === 'outcall' && currentRegion === '제주') {
+        window.location.href = 'jeju-outcall.html';
+        return;
+      }
+
       filterByType(selectedTheme);
 
       // 테마 필터 섹션 숨기기
@@ -1211,7 +1175,13 @@ function performLocationSearch() {
   if (!currentRegion) {
     // 지역이 선택되지 않은 경우 전체 표시
     displayMassageShops(massageShops);
-    updateResultsHeader('전체 마사지 업체', massageShops.length);
+    // 메인 페이지가 아닌 경우 "마사지"로 표시
+    const isMainPage =
+      window.location.pathname.includes('index.html') ||
+      window.location.pathname === '/' ||
+      window.location.pathname === '';
+    const title = isMainPage ? '전체 마사지사이트 업체' : '전체 마사지 업체';
+    updateResultsHeader(title, massageShops.length);
     return;
   }
 
@@ -1295,6 +1265,20 @@ function performSearch() {
 // 필터링된 결과 표시
 function displayFilteredResults() {
   let filteredShops = massageShops;
+
+  // 지역 필터 적용
+  if (currentRegion) {
+    filteredShops = filteredShops.filter(
+      (shop) => shop.region === currentRegion
+    );
+  }
+
+  // 구 필터 적용
+  if (currentDistrict) {
+    filteredShops = filteredShops.filter(
+      (shop) => shop.district === currentDistrict
+    );
+  }
 
   // 타입 필터 적용
   if (currentFilter === 'massage') {
@@ -1440,7 +1424,14 @@ function displayFilteredResults() {
   displayMassageShops(filteredShops);
 
   // 결과 헤더 업데이트
-  let title = '전체 마사지 업체';
+  // 메인 페이지가 아닌 경우 "마사지"로 표시
+  const isMainPage =
+    window.location.pathname.includes('index.html') ||
+    window.location.pathname === '/' ||
+    window.location.pathname === '';
+  let title = isMainPage ? '전체 마사지사이트 업체' : '전체 마사지 업체';
+
+  // 필터별 제목 설정
   if (currentFilter === 'massage') {
     if (currentCountry && currentCountry !== 'overall') {
       const countryNames = {
@@ -1452,7 +1443,7 @@ function displayFilteredResults() {
       };
       title = `${countryNames[currentCountry]} 마사지`;
     } else {
-      title = '마사지 (전체)';
+      title = '마사지';
     }
   } else if (currentFilter === 'outcall') {
     if (currentCountry && currentCountry !== 'overall') {
@@ -1465,12 +1456,23 @@ function displayFilteredResults() {
       };
       title = `${countryNames[currentCountry]} 출장마사지`;
     } else {
-      title = '출장마사지 (전체)';
+      title = '출장마사지';
     }
   } else if (currentFilter === 'waxing') {
     title = '왁싱';
+  } else if (currentFilter === 'swedish') {
+    title = '스웨디시';
+  } else if (currentFilter === 'thai') {
+    title = '타이마사지';
+  } else if (currentFilter === 'aroma') {
+    title = '아로마마사지';
+  } else if (currentFilter === 'chinese') {
+    title = '중국마사지';
+  } else if (currentFilter === 'foot') {
+    title = '발마사지';
   }
 
+  // 지역과 구 정보 추가
   if (currentRegion && currentDistrict) {
     title = `${currentRegion} ${currentDistrict} ${title}`;
   } else if (currentRegion) {
@@ -1649,6 +1651,15 @@ function filterByType(selectedType) {
   let filteredShops = massageShops;
 
   if (selectedType && selectedType !== 'all') {
+    // 제주 지역에서 마사지/출장마사지 테마 클릭 시 해당 페이지로 이동
+    if (selectedType === 'massage' && currentRegion === '제주') {
+      window.location.href = 'jeju-massage.html';
+      return;
+    } else if (selectedType === 'outcall' && currentRegion === '제주') {
+      window.location.href = 'jeju-outcall.html';
+      return;
+    }
+
     // 테마별 서비스 키워드 매핑
     const themeKeywords = {
       swedish: ['스웨디시', '스웨덴'],
@@ -1903,6 +1914,34 @@ function displayMassageShops(shops) {
 
   // 카드 애니메이션 적용 (즉시 실행)
   observeCards();
+
+  // 스크롤 이벤트 리스너 - 국가별 마사지 섹션 숨기기
+  let scrollTimeout;
+  window.addEventListener('scroll', function () {
+    // 스크롤이 발생하면 국가별 마사지 섹션들을 숨김
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(function () {
+      const massageCountryFilterSection = document.getElementById(
+        'massageCountryFilterSection'
+      );
+      const outcallCountryFilterSection = document.getElementById(
+        'outcallCountryFilterSection'
+      );
+
+      if (
+        massageCountryFilterSection &&
+        massageCountryFilterSection.style.display !== 'none'
+      ) {
+        massageCountryFilterSection.style.display = 'none';
+      }
+      if (
+        outcallCountryFilterSection &&
+        outcallCountryFilterSection.style.display !== 'none'
+      ) {
+        outcallCountryFilterSection.style.display = 'none';
+      }
+    }, 100); // 100ms 지연 후 실행
+  });
 }
 
 // 회사소개 모달 열기
@@ -1919,6 +1958,16 @@ function openAboutModal(event) {
 function openTermsModal(event) {
   event.preventDefault();
   const modal = document.getElementById('termsModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 스크롤 방지
+  }
+}
+
+// 상세정보 모달 열기
+function openDetailsModal(event) {
+  event.preventDefault();
+  const modal = document.getElementById('detailsModal');
   if (modal) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden'; // 스크롤 방지
