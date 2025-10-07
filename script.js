@@ -788,6 +788,86 @@ function initializeApp() {
   if (allFilterBtn) {
     allFilterBtn.classList.add('active');
   }
+  
+  // footer-links 텍스트 초기 업데이트
+  updateFooterLinkText();
+  
+  // jeju-si.html 페이지에서 구 정보 유지
+  const currentPath = window.location.pathname;
+  const currentFileName = currentPath.split('/').pop();
+  if (currentFileName === 'jeju-si.html') {
+    // 제주시로 설정
+    currentRegion = '제주';
+    currentDistrict = '제주시';
+    currentFilter = 'all';
+    
+    // 구 선택 활성화
+    const districtSelect = document.getElementById('districtSelect');
+    if (districtSelect) {
+      districtSelect.disabled = false;
+      districtSelect.style.opacity = '1';
+    }
+  } else if (currentFileName === 'jeju-si-massage.html') {
+    // 제주시 마사지로 설정
+    currentRegion = '제주';
+    currentDistrict = '제주시';
+    currentFilter = 'massage';
+    
+    // 구 선택 활성화
+    const districtSelect = document.getElementById('districtSelect');
+    if (districtSelect) {
+      districtSelect.disabled = false;
+      districtSelect.style.opacity = '1';
+    }
+  } else if (currentFileName === 'jeju-si-outcall.html') {
+    // 제주시 출장마사지로 설정
+    currentRegion = '제주';
+    currentDistrict = '제주시';
+    currentFilter = 'outcall';
+    
+    // 구 선택 활성화
+    const districtSelect = document.getElementById('districtSelect');
+    if (districtSelect) {
+      districtSelect.disabled = false;
+      districtSelect.style.opacity = '1';
+    }
+  } else if (currentFileName === 'jeju-seogwipo.html') {
+    // 서귀포시로 설정
+    currentRegion = '제주';
+    currentDistrict = '서귀포시';
+    currentFilter = 'all';
+    
+    // 구 선택 활성화
+    const districtSelect = document.getElementById('districtSelect');
+    if (districtSelect) {
+      districtSelect.disabled = false;
+      districtSelect.style.opacity = '1';
+    }
+  } else if (currentFileName === 'jeju-seogwipo-massage.html') {
+    // 서귀포시 마사지로 설정
+    currentRegion = '제주';
+    currentDistrict = '서귀포시';
+    currentFilter = 'massage';
+    
+    // 구 선택 활성화
+    const districtSelect = document.getElementById('districtSelect');
+    if (districtSelect) {
+      districtSelect.disabled = false;
+      districtSelect.style.opacity = '1';
+    }
+  } else if (currentFileName === 'jeju-seogwipo-outcall.html') {
+    // 서귀포시 출장마사지로 설정
+    currentRegion = '제주';
+    currentDistrict = '서귀포시';
+    currentFilter = 'outcall';
+    
+    // 구 선택 활성화
+    const districtSelect = document.getElementById('districtSelect');
+    if (districtSelect) {
+      districtSelect.disabled = false;
+      districtSelect.style.opacity = '1';
+    }
+  }
 
   // 검색 토글 버튼 이벤트 리스너 (검색창으로 스크롤)
   const searchToggle = document.getElementById('searchToggle');
@@ -864,15 +944,53 @@ function initializeApp() {
     // 현재 구 설정
     currentDistrict = selectedDistrict;
 
+    // 제주 + 제주시 + 전체(all)일 때 jeju-si.html로 이동
+    if (currentRegion === '제주' && selectedDistrict === '제주시' && currentFilter === 'all') {
+      window.location.href = 'jeju-si.html';
+      return;
+    }
+    
+    // 제주 + 제주시 + 마사지일 때 jeju-si-massage.html로 이동
+    if (currentRegion === '제주' && selectedDistrict === '제주시' && currentFilter === 'massage') {
+      window.location.href = 'jeju-si-massage.html';
+      return;
+    }
+    
+    // 제주 + 제주시 + 출장마사지일 때 jeju-si-outcall.html로 이동
+    if (currentRegion === '제주' && selectedDistrict === '제주시' && currentFilter === 'outcall') {
+      window.location.href = 'jeju-si-outcall.html';
+      return;
+    }
+    
+    // 제주 + 서귀포시 + 전체(all)일 때 jeju-seogwipo.html로 이동
+    if (currentRegion === '제주' && selectedDistrict === '서귀포시' && currentFilter === 'all') {
+      window.location.href = 'jeju-seogwipo.html';
+      return;
+    }
+    
+    // 제주 + 서귀포시 + 마사지일 때 jeju-seogwipo-massage.html로 이동
+    if (currentRegion === '제주' && selectedDistrict === '서귀포시' && currentFilter === 'massage') {
+      window.location.href = 'jeju-seogwipo-massage.html';
+      return;
+    }
+    
+    // 제주 + 서귀포시 + 출장마사지일 때 jeju-seogwipo-outcall.html로 이동
+    if (currentRegion === '제주' && selectedDistrict === '서귀포시' && currentFilter === 'outcall') {
+      window.location.href = 'jeju-seogwipo-outcall.html';
+      return;
+    }
+
     // 필터링된 결과 표시
     displayFilteredResults();
   });
 
-  // 검색 버튼 이벤트 리스너
-  searchBtn.addEventListener('click', function (e) {
-    e.preventDefault(); // 기본 동작 방지
-    performSearch();
-  });
+  // 검색 버튼 이벤트 리스너 (searchBtn이 존재할 때만)
+  if (searchBtn) {
+    searchBtn.addEventListener('click', function (e) {
+      e.preventDefault(); // 기본 동작 방지
+      performSearch();
+    });
+  }
 
   // 통합 검색 이벤트 리스너
   mainSearchBtn.addEventListener('click', function (e) {
@@ -923,21 +1041,69 @@ function initializeApp() {
     }, 300);
   });
 
-  // 필터 버튼 이벤트 리스너
+  // 필터 버튼 이벤트 리스너 (관련정보 버튼 제외)
   filterBtns.forEach((btn) => {
+    // 관련정보 버튼은 필터 이벤트에서 제외
+    if (btn.classList.contains('info-btn')) {
+      return;
+    }
+    
     btn.addEventListener('click', function (e) {
       e.preventDefault(); // 기본 동작 방지
-      // 모든 필터 버튼에서 active 클래스 제거
-      filterBtns.forEach((b) => b.classList.remove('active'));
+      
+      // jeju.html에서 all 필터 클릭 시 메인 페이지로 이동
+      const resultsTitle = document.getElementById('resultsTitle');
+      if (resultsTitle && resultsTitle.textContent.includes('제주 마사지사이트 업체') && this.getAttribute('data-filter') === 'all') {
+        window.location.href = 'index.html';
+        return;
+      }
+      
+      // 모든 필터 버튼에서 active 클래스 제거 (관련정보 버튼 제외)
+      filterBtns.forEach((b) => {
+        if (!b.classList.contains('info-btn')) {
+          b.classList.remove('active');
+        }
+      });
       // 클릭된 버튼에 active 클래스 추가
       this.classList.add('active');
       // 현재 필터 업데이트
       currentFilter = this.dataset.filter;
 
-      // 마사지, 출장마사지 클릭 시 해당 HTML 페이지로 이동
-      if (currentFilter === 'massage') {
-        // 제주 지역이 선택된 경우 jeju-massage.html로 이동
+      // all, 마사지, 출장마사지 클릭 시 해당 HTML 페이지로 이동
+      if (currentFilter === 'all') {
+        // 제주 지역이 선택된 경우
         if (currentRegion === '제주') {
+          // 제주시가 선택된 경우 jeju-si.html로 이동
+          if (currentDistrict === '제주시') {
+            window.location.href = 'jeju-si.html';
+            return;
+          }
+          // 서귀포시가 선택된 경우 jeju-seogwipo.html로 이동
+          if (currentDistrict === '서귀포시') {
+            window.location.href = 'jeju-seogwipo.html';
+            return;
+          }
+          // 다른 구의 경우 jeju.html로 이동
+          window.location.href = 'jeju.html';
+          return;
+        }
+        // 다른 지역의 경우 index.html로 이동
+        window.location.href = 'index.html';
+        return;
+      } else if (currentFilter === 'massage') {
+        // 제주 지역이 선택된 경우
+        if (currentRegion === '제주') {
+          // 제주시가 선택된 경우 jeju-si-massage.html로 이동
+          if (currentDistrict === '제주시') {
+            window.location.href = 'jeju-si-massage.html';
+            return;
+          }
+          // 서귀포시가 선택된 경우 jeju-seogwipo-massage.html로 이동
+          if (currentDistrict === '서귀포시') {
+            window.location.href = 'jeju-seogwipo-massage.html';
+            return;
+          }
+          // 다른 구의 경우 jeju-massage.html로 이동
           window.location.href = 'jeju-massage.html';
           return;
         }
@@ -945,8 +1111,19 @@ function initializeApp() {
         window.location.href = 'massage.html';
         return;
       } else if (currentFilter === 'outcall') {
-        // 제주 지역이 선택된 경우 jeju-outcall.html로 이동
+        // 제주 지역이 선택된 경우
         if (currentRegion === '제주') {
+          // 제주시가 선택된 경우 jeju-si-outcall.html로 이동
+          if (currentDistrict === '제주시') {
+            window.location.href = 'jeju-si-outcall.html';
+            return;
+          }
+          // 서귀포시가 선택된 경우 jeju-seogwipo-outcall.html로 이동
+          if (currentDistrict === '서귀포시') {
+            window.location.href = 'jeju-seogwipo-outcall.html';
+            return;
+          }
+          // 다른 구의 경우 jeju-outcall.html로 이동
           window.location.href = 'jeju-outcall.html';
           return;
         }
@@ -989,20 +1166,23 @@ function initializeApp() {
       if (themeFilterSection) {
         const isVisible = themeFilterSection.style.display !== 'none';
         themeFilterSection.style.display = isVisible ? 'none' : 'block';
+        
+        // 버튼 눌러진 표시 토글
+        typeFilterBtn.classList.toggle('active', !isVisible);
 
-        // 테마 필터 섹션이 보여질 때 전체 보기 버튼 활성화
+        // 테마 필터 섹션이 보여질 때 전체 보기 버튼 활성화 (눌림표시 없이)
         if (!isVisible) {
-          // 전체 보기 버튼 활성화
+          // 전체 보기 버튼은 기능적으로만 활성화 (눌림표시 없이)
           const allFilterBtn = document.querySelector(
             '.filter-btn[data-filter="all"]'
           );
           if (allFilterBtn) {
-            allFilterBtn.classList.add('active');
+            allFilterBtn.classList.remove('active'); // 눌림표시 제거
           }
 
-          // 다른 필터 버튼들 비활성화
+          // 다른 필터 버튼들 비활성화 (테마보기 버튼은 제외)
           document.querySelectorAll('.filter-btn').forEach((btn) => {
-            if (btn.dataset.filter !== 'all') {
+            if (!btn.classList.contains('type-filter-btn')) {
               btn.classList.remove('active');
             }
           });
@@ -1040,22 +1220,65 @@ function initializeApp() {
       // 선택된 테마로 필터링
       const selectedTheme = this.dataset.theme;
 
-      // 제주 지역에서 마사지/출장마사지 테마 클릭 시 해당 페이지로 이동
-      if (selectedTheme === 'massage' && currentRegion === '제주') {
-        window.location.href = 'jeju-massage.html';
-        return;
-      } else if (selectedTheme === 'outcall' && currentRegion === '제주') {
-        window.location.href = 'jeju-outcall.html';
-        return;
+      // 제주 지역에서 테마 클릭 시 해당 페이지로 이동
+      if (currentRegion === '제주') {
+        if (selectedTheme === 'all') {
+          // 제주시가 선택된 경우 jeju-si.html로 이동
+          if (currentDistrict === '제주시') {
+            window.location.href = 'jeju-si.html';
+            return;
+          }
+          // 서귀포시가 선택된 경우 jeju-seogwipo.html로 이동
+          if (currentDistrict === '서귀포시') {
+            window.location.href = 'jeju-seogwipo.html';
+            return;
+          }
+          // 다른 구의 경우 jeju.html로 이동
+          window.location.href = 'jeju.html';
+          return;
+        } else if (selectedTheme === 'massage') {
+          // 제주시가 선택된 경우 jeju-si-massage.html로 이동
+          if (currentDistrict === '제주시') {
+            window.location.href = 'jeju-si-massage.html';
+            return;
+          }
+          // 서귀포시가 선택된 경우 jeju-seogwipo-massage.html로 이동
+          if (currentDistrict === '서귀포시') {
+            window.location.href = 'jeju-seogwipo-massage.html';
+            return;
+          }
+          // 다른 구의 경우 jeju-massage.html로 이동
+          window.location.href = 'jeju-massage.html';
+          return;
+        } else if (selectedTheme === 'outcall') {
+          // 제주시가 선택된 경우 jeju-si-outcall.html로 이동
+          if (currentDistrict === '제주시') {
+            window.location.href = 'jeju-si-outcall.html';
+            return;
+          }
+          // 서귀포시가 선택된 경우 jeju-seogwipo-outcall.html로 이동
+          if (currentDistrict === '서귀포시') {
+            window.location.href = 'jeju-seogwipo-outcall.html';
+            return;
+          }
+          // 다른 구의 경우 jeju-outcall.html로 이동
+          window.location.href = 'jeju-outcall.html';
+          return;
+        }
       }
 
       filterByType(selectedTheme);
+      
+      // resultsTitle 업데이트
+      updateResultsTitleByTheme(selectedTheme);
 
       // 테마 필터 섹션 숨기기
       const themeFilterSection = document.getElementById('themeFilterSection');
       if (themeFilterSection) {
         themeFilterSection.style.display = 'none';
       }
+      
+      // 테마보기 버튼 눌러진 표시 유지 (제거하지 않음)
     });
   });
 
@@ -1265,6 +1488,9 @@ function performSearch() {
 // 필터링된 결과 표시
 function displayFilteredResults() {
   let filteredShops = massageShops;
+  
+  // footer-links 텍스트 업데이트
+  updateFooterLinkText();
 
   // 지역 필터 적용
   if (currentRegion) {
@@ -1794,8 +2020,36 @@ function getGreeting(shop) {
 
 // 결과 헤더 업데이트
 function updateResultsHeader(title, count) {
+  // "전체" 문자 제거
+  title = title.replace(/\s*전체\s*/g, '');
   resultsTitle.textContent = title;
   resultsCount.textContent = `총 ${count}개`;
+}
+
+// 테마별 resultsTitle 업데이트
+function updateResultsTitleByTheme(selectedTheme) {
+  const themeNames = {
+    all: '전체',
+    swedish: '스웨디시',
+    thai: '타이마사지',
+    aroma: '아로마마사지',
+    waxing: '왁싱',
+    chinese: '중국마사지',
+    foot: '발마사지'
+  };
+  
+  if (resultsTitle) {
+    const regionName = currentRegion || '';
+    const themeName = themeNames[selectedTheme] || selectedTheme;
+    const filterType = currentFilter === 'massage' ? '마사지' : 
+                      currentFilter === 'outcall' ? '출장마사지' : '';
+    
+    if (selectedTheme === 'all') {
+      resultsTitle.textContent = `${regionName}${filterType} 전체 업체`;
+    } else {
+      resultsTitle.textContent = `${regionName}${themeName}${filterType} 업체`;
+    }
+  }
 }
 
 // 전화 걸기
@@ -1964,10 +2218,138 @@ function openTermsModal(event) {
   }
 }
 
+// 현재 필터 상태 가져오기
+function getCurrentFilter() {
+  const activeFilter = document.querySelector('.filter-btn.active');
+  return activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+}
+
+// footer-links 상세정보 텍스트 업데이트
+function updateFooterLinkText() {
+  const footerLink = document.querySelector('.footer-link[onclick*="openDetailsModal"]');
+  if (!footerLink) return;
+  
+  // 현재 페이지 URL에 따른 특별 처리
+  const currentPath = window.location.pathname;
+  const currentFileName = currentPath.split('/').pop();
+  
+  let titleText = '상세정보';
+  
+  // 파일명을 기반으로 자동 생성
+  if (currentFileName === 'outcall.html') {
+    titleText = '출장마사지정보';
+  } else if (currentFileName === 'massage.html') {
+    // massage.html의 경우 현재 필터에 따라 결정
+    const currentFilter = getCurrentFilter();
+    titleText = currentFilter === 'outcall' ? '출장마사지정보' : '마사지정보';
+  } else {
+    // 파일명에서 지역, 구, 필터 추출하여 자동 생성
+    let region = '';
+    let district = '';
+    let filterType = '마사지사이트';
+    
+    // jeju 관련 파일인지 확인
+    if (currentFileName.includes('jeju')) {
+      region = '제주';
+      
+      // 구 추출
+      if (currentFileName.includes('jeju-si')) {
+        district = ' 제주시';
+      } else if (currentFileName.includes('jeju-seogwipo')) {
+        district = ' 서귀포시';
+      }
+      
+      // 필터 타입 추출
+      if (currentFileName.includes('-massage.html')) {
+        filterType = '마사지';
+      } else if (currentFileName.includes('-outcall.html')) {
+        filterType = '출장마사지';
+      }
+      // .html 또는 jeju.html의 경우 '마사지사이트' 유지
+    }
+    
+    // 최종 텍스트 생성
+    if (region) {
+      titleText = `${region}${district}${filterType}정보`;
+    } else {
+      // 기존 로직 (동적 생성) - jeju가 아닌 다른 파일들
+      const resultsTitle = document.getElementById('resultsTitle');
+      const regionSelect = document.getElementById('regionSelect');
+      const districtSelect = document.getElementById('districtSelect');
+      const currentFilter = getCurrentFilter();
+      
+      if (resultsTitle) {
+        const title = resultsTitle.textContent;
+        // "업체"를 "정보"로 변경
+        titleText = title.replace('업체', '정보');
+      } else if (regionSelect && districtSelect) {
+        // resultsTitle이 없을 경우 지역 정보로 구성
+        const region = regionSelect.value || regionSelect.options[regionSelect.selectedIndex]?.text || '';
+        const district = districtSelect.value || districtSelect.options[districtSelect.selectedIndex]?.text || '';
+        const filterType = currentFilter === 'outcall' ? '출장마사지' : '마사지';
+        
+        if (region && district && district !== '구를 선택하세요') {
+          titleText = `${region}${district}${filterType}정보`;
+        } else if (region) {
+          titleText = `${region}${filterType}정보`;
+        } else {
+          titleText = `${filterType}정보`;
+        }
+      }
+    }
+  }
+  
+  footerLink.textContent = titleText;
+}
+
 // 상세정보 모달 열기
 function openDetailsModal(event) {
   event.preventDefault();
   const modal = document.getElementById('detailsModal');
+  if (modal) {
+    // 현재 페이지의 지역과 마사지 타입 정보 가져오기
+    const resultsTitle = document.getElementById('resultsTitle');
+    const regionSelect = document.getElementById('regionSelect');
+    const districtSelect = document.getElementById('districtSelect');
+    const currentFilter = getCurrentFilter();
+    
+    let titleText = '상세정보';
+    
+    if (resultsTitle) {
+      const title = resultsTitle.textContent;
+      // "업체"를 "정보"로 변경
+      titleText = title.replace('업체', '정보');
+    } else if (regionSelect && districtSelect) {
+      // resultsTitle이 없을 경우 지역 정보로 구성
+      const region = regionSelect.value || regionSelect.options[regionSelect.selectedIndex]?.text || '';
+      const district = districtSelect.value || districtSelect.options[districtSelect.selectedIndex]?.text || '';
+      const filterType = currentFilter === 'outcall' ? '출장마사지' : '마사지';
+      
+      if (region && district && district !== '구를 선택하세요') {
+        titleText = `${region}${district}${filterType}정보`;
+      } else if (region) {
+        titleText = `${region}${filterType}정보`;
+      } else {
+        titleText = `${filterType}정보`;
+      }
+    }
+    
+    // footer-links의 상세정보 텍스트 업데이트
+    const footerLink = event.target;
+    if (footerLink) {
+      footerLink.textContent = titleText;
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 스크롤 방지
+  }
+}
+
+// 관련정보 모달 열기
+function openRelatedInfoModal(event) {
+  event.preventDefault();
+  
+  const modal = document.getElementById('relatedInfoModal');
   if (modal) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden'; // 스크롤 방지
@@ -1990,3 +2372,98 @@ window.addEventListener('click', function (event) {
     document.body.style.overflow = '';
   }
 });
+
+// 필터 컨테이너 드래그 스크롤 기능
+function initFilterDragScroll() {
+  const filterContainer = document.querySelector('.filter-container');
+  if (!filterContainer) return;
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  let hasMoved = false; // 드래그 움직임 감지
+
+  // 마우스 이벤트
+  filterContainer.addEventListener('mousedown', (e) => {
+    isDown = true;
+    hasMoved = false;
+    filterContainer.classList.add('active');
+    startX = e.pageX - filterContainer.offsetLeft;
+    scrollLeft = filterContainer.scrollLeft;
+    e.preventDefault();
+  });
+
+  filterContainer.addEventListener('mouseleave', () => {
+    isDown = false;
+    filterContainer.classList.remove('active');
+  });
+
+  filterContainer.addEventListener('mouseup', (e) => {
+    if (isDown && hasMoved) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    isDown = false;
+    filterContainer.classList.remove('active');
+  });
+
+  filterContainer.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    hasMoved = true;
+    const x = e.pageX - filterContainer.offsetLeft;
+    const walk = (x - startX) * 2; // 스크롤 속도 조절
+    filterContainer.scrollLeft = scrollLeft - walk;
+  });
+
+  // 터치 이벤트 (모바일)
+  let startTouchX;
+  let startScrollLeft;
+  let touchHasMoved = false;
+
+  filterContainer.addEventListener('touchstart', (e) => {
+    isDown = true;
+    touchHasMoved = false;
+    filterContainer.classList.add('active');
+    startTouchX = e.touches[0].pageX;
+    startScrollLeft = filterContainer.scrollLeft;
+  }, { passive: false });
+
+  filterContainer.addEventListener('touchend', (e) => {
+    if (isDown && touchHasMoved) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    isDown = false;
+    filterContainer.classList.remove('active');
+  });
+
+  filterContainer.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    touchHasMoved = true;
+    const touchX = e.touches[0].pageX;
+    const walk = (startTouchX - touchX) * 2; // 스크롤 속도 조절
+    filterContainer.scrollLeft = startScrollLeft + walk;
+  }, { passive: false });
+
+  // 휠 이벤트 (마우스 휠로 좌우 스크롤)
+  filterContainer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    filterContainer.scrollLeft += e.deltaY;
+  }, { passive: false });
+
+  // 필터 버튼 클릭 이벤트 방지 (드래그 중일 때)
+  const filterButtons = filterContainer.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (hasMoved || touchHasMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+  });
+}
+
+// 페이지 로드 시 드래그 스크롤 초기화
+document.addEventListener('DOMContentLoaded', initFilterDragScroll);
